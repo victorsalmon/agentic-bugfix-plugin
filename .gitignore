@@ -1,0 +1,17 @@
+# 4C dossiers (per-bug fix records) — local working state, not committed
+.4c/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Plugin install/build artifacts (if added later)
+node_modules/
+dist/
+*.zip
