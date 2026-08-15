@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-08-15
+
+### Added
+- `4c-bugfix` as the concise primary orchestrator skill name; the original
+  plugin/skill remains available as a compatibility alias during migration.
+- Mandatory property/invariant classification and reproducible property-suite
+  proof for application-code bug fixes.
+- Changed-file plus full-portfolio mutation proof, with a per-file floor of
+  85% and zero meaningful financial/security survivors.
+
+### Changed
+- `4c-check` now records property seeds, mutation scores, and survivor
+  dispositions as part of the red-then-green completion evidence.
+
 ## [0.1.0] - 2026-08-11
 
 ### Added

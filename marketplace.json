@@ -10,7 +10,7 @@
     {
       "name": "agentic-4c-bugfix",
       "description": "A disciplined, four-gate bug-fixing methodology for coding agents: Concern (failing repro) -> Cause (root cause + siblings) -> Countermeasure (fix the architecture) -> Check (red-then-green proof + hardening). Reproduce-first, regression-proof, blast-radius-free fixes.",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "author": { "name": "Clock Lobster", "url": "https://worktree.ca/clocklobster" },
       "source": ".",
       "category": "quality",

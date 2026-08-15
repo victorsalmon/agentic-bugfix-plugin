@@ -2,11 +2,15 @@
 
 > A disciplined, four-gate bug-fixing methodology for coding agents — **Concern → Cause → Countermeasure → Check**.
 
-[![Version](https://img.shields.io/badge/version-0.1.0-blue)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.2.0-blue)](./CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 [![Standard: Agent Plugins](https://img.shields.io/badge/standard-Agent%20Plugins-orange)](https://worktree.ca/clocklobster/agentic-bugfix-plugin)
 
-`agentic-4c-bugfix` is an open [Agent Plugins](#compatibility) skill pack that makes a coding agent fix bugs the way a careful engineer does: **reproduce first, find the root cause, fix the architecture (not the symptom), then prove the fix and harden against the whole bug class.** It is deliberately framework-agnostic and works on any codebase with a test runner.
+`agentic-4c-bugfix` is an open [Agent Plugins](#compatibility) skill pack. Its
+primary orchestrator skill is `4c-bugfix`, which makes a coding agent fix bugs
+the way a careful engineer does: **reproduce first, find the root cause, fix the
+architecture (not the symptom), then prove the fix with properties, mutation,
+and the full regression suite.**
 
 The single most important rule is the **red gate**: no application source is touched until a failing reproduction test exists, runs in the shell, and is committed. A fix without a red repro is not a 4C fix.
 
@@ -37,7 +41,10 @@ The triage step keeps it from becoming bureaucratic: trivial changes (typos, con
    no source yet      dossier: RCA      dossier: fix SHA(s)      dossier: proof
 ```
 
-Each gate is its own invocable skill, so you can run the whole loop (`agentic-4c-bugfix`) or jump to a single gate (`/4c-concern`, `/4c-cause`, `/4c-countermeasure`, `/4c-check`). State is carried between gates by a **dossier** — a single markdown file per bug (`.4c/<bug-id>.md`) — so the loop survives sub-agent dispatch and session boundaries.
+Each gate is its own invocable skill, so you can run the whole loop
+(`4c-bugfix`) or jump to a single gate (`/4c-concern`, `/4c-cause`,
+`/4c-countermeasure`, `/4c-check`). State is carried between gates by a
+**dossier** — a single markdown file per bug (`.4c/<bug-id>.md`).
 
 ---
 
@@ -45,7 +52,7 @@ Each gate is its own invocable skill, so you can run the whole loop (`agentic-4c
 
 1. **Install the plugin** (see [Installation](#installation)).
 2. Report a bug as you normally would: *"the totals report double-counts split payments."*
-3. The agent triggers `agentic-4c-bugfix`, triages it (non-trivial → run the loop), and walks the four gates — writing a failing test first, then RCA, then the fix, then proof.
+3. The agent triggers `4c-bugfix`, triages it (non-trivial → run the loop), and walks the four gates — writing a failing test first, then RCA, then the fix, then property/mutation/regression proof.
 4. You get a fix plus a dossier recording the red repro, root cause, sibling fixes, and green proof.
 
 You can also invoke a gate directly, e.g. `/4c-concern` to just pin a reproduction, or `/4c-check` to verify someone else's fix.
@@ -125,7 +132,8 @@ The plugin is zero-config by default. Two conventions, both overridable:
 
 | Skill | Purpose |
 |---|---|
-| `agentic-4c-bugfix` | Orchestrator — triage, dossier, runs all four gates |
+| `4c-bugfix` | Primary orchestrator — triage, dossier, all four gates, property and mutation proof |
+| `agentic-4c-bugfix` | Compatibility alias retained during migration |
 | `4c-concern` | Red gate — a committed, failing reproduction test before any source edit |
 | `4c-cause` | 5-Whys root cause + codebase-wide sibling search, written to the dossier |
 | `4c-countermeasure` | Minimal architectural fix + every sibling repaired or explicitly deferred |

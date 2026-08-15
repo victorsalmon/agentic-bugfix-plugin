@@ -1,7 +1,7 @@
 # Syncing from the private canonical implementation
 
 This public plugin is a **generalized projection** of a richer, private
-canonical implementation (the `agentic-4c-bugfix` skill family in an internal
+canonical implementation (the `4c-bugfix` skill family in an internal
 monorepo). The two share skill names and the identical 4C methodology, but the
 public version strips everything environment-specific so it is useful to anyone.
 
@@ -12,7 +12,8 @@ remote. This document is the checklist.
 
 | Canonical (private) | Public (this repo) |
 |---|---|
-| `<monorepo>/Skills/QA/agentic-4c-bugfix/SKILL.md` | `skills/agentic-4c-bugfix/SKILL.md` |
+| `<monorepo>/Skills/QA/4c-bugfix/SKILL.md` | `skills/4c-bugfix/SKILL.md` |
+| Legacy `agentic-4c-bugfix` alias | Legacy `skills/agentic-4c-bugfix/SKILL.md` alias during migration |
 | `<monorepo>/Skills/QA/agentic-4c-bugfix/4c-concern/SKILL.md` | `skills/4c-concern/SKILL.md` |
 | `<monorepo>/Skills/QA/agentic-4c-bugfix/4c-cause/SKILL.md` | `skills/4c-cause/SKILL.md` |
 | `<monorepo>/Skills/QA/agentic-4c-bugfix/4c-countermeasure/SKILL.md` | `skills/4c-countermeasure/SKILL.md` |
