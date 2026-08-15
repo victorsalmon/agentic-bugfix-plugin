@@ -11,7 +11,37 @@ description: >
 # 4C Bug Fix
 
 Run `4c-concern`, `4c-cause`, `4c-countermeasure`, and `4c-check` in order.
-Keep the four sections in one dossier at `.4c/<bug-id>.md`.
+Keep the four sections in one dossier at `.4c/<bug-id>.md`. Template:
+
+```markdown
+# <bug-id> - 4C Bug Fix
+**Repo:** <name> - <branch>   **Started:** <date>
+
+## Concern
+- Failure in one sentence: When X, Y happens instead of Z.
+- Repro test: <path>#<test-name>   (committed at <sha>, RED)
+- Repro run output (failing): <paste>
+- Property test (if the defect is a general invariant): <path>#<prop-name>
+  (committed at <sha>, RED)
+
+## Cause
+- Root cause (one paragraph): ...
+- Violated invariant: ...
+- Sibling occurrences of the anti-pattern: <path:line> list
+
+## Countermeasure
+- Fix commit(s): <sha>   Siblings fixed: <list or "n/a">
+
+## Check
+- Repro test now: GREEN (paste)
+- Property suite: seed <seed> - GREEN (paste); TEETH proof that a broken
+  implementation is rejected
+- Mutation: changed-file scores <x%>/<y%>, full-portfolio score <z%> (threshold
+  85%); survivors listed with disposition
+- Edge-case tests added: <list>
+- Full suite: GREEN   Quality-scan findings: <list or "scanner unavailable">
+- Red-gate proof: test commit <sha> precedes fix commit <sha>; test was RED without fix.
+```
 
 ## Required proof
 

@@ -1,16 +1,16 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "agentic-bugfix-plugin",
-  "description": "Single-plugin marketplace for agentic-4c-bugfix — a disciplined, four-gate bug-fixing methodology for coding agents.",
+  "description": "Single-plugin marketplace for 4c-bugfix — a disciplined, four-gate bug-fixing methodology for coding agents.",
   "owner": {
     "name": "Clock Lobster",
     "url": "https://worktree.ca/clocklobster"
   },
   "plugins": [
     {
-      "name": "agentic-4c-bugfix",
+      "name": "4c-bugfix",
       "description": "A disciplined, four-gate bug-fixing methodology for coding agents: Concern (failing repro) -> Cause (root cause + siblings) -> Countermeasure (fix the architecture) -> Check (red-then-green proof + hardening). Reproduce-first, regression-proof, blast-radius-free fixes.",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "author": { "name": "Clock Lobster", "url": "https://worktree.ca/clocklobster" },
       "source": ".",
       "category": "quality",

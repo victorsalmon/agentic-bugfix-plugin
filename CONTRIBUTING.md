@@ -1,4 +1,4 @@
-# Contributing to agentic-4c-bugfix
+# Contributing to 4c-bugfix
 
 Thanks for your interest in improving the 4C bug-fixing methodology. This plugin
 is intentionally small and stable, so the bar for changes is **clarity and

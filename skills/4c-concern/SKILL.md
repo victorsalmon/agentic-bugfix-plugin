@@ -4,7 +4,7 @@ description: >
   Red gate of the 4C pattern — pin the failure by writing and committing a
   failing reproduction test before any application source is modified. Use when
   starting any non-trivial bug fix, when the reproduction is unclear, or as the
-  first gate of agentic-4c-bugfix. Never skip this gate; a fix without a red
+  first gate of 4c-bugfix. Never skip this gate; a fix without a red
   repro is not a 4C fix.
 triggers:
   - user
@@ -27,7 +27,10 @@ edit. This is the gate the whole loop depends on.
    the least surrounding machinery.
 5. Write a failing reproduction test. Run it in the shell and **confirm it fails
    for the bug's reason** (not for a setup error). Paste the failing output into
-   the dossier.
+   the dossier. If the defect is a general invariant (money, dates,
+   parser/serializer, state transitions, authorization, tenancy,
+   idempotency/concurrency), also write a failing property test and record its
+   seed.
 6. **Commit the test on its own** with `test: add failing repro for <bug>` so the
    RED state is recorded in git history — `4c-check` will verify this commit
    precedes the fix.

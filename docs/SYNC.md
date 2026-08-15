@@ -13,13 +13,13 @@ remote. This document is the checklist.
 | Canonical (private) | Public (this repo) |
 |---|---|
 | `<monorepo>/Skills/QA/4c-bugfix/SKILL.md` | `skills/4c-bugfix/SKILL.md` |
-| Legacy `agentic-4c-bugfix` alias | Legacy `skills/agentic-4c-bugfix/SKILL.md` alias during migration |
-| `<monorepo>/Skills/QA/agentic-4c-bugfix/4c-concern/SKILL.md` | `skills/4c-concern/SKILL.md` |
-| `<monorepo>/Skills/QA/agentic-4c-bugfix/4c-cause/SKILL.md` | `skills/4c-cause/SKILL.md` |
-| `<monorepo>/Skills/QA/agentic-4c-bugfix/4c-countermeasure/SKILL.md` | `skills/4c-countermeasure/SKILL.md` |
-| `<monorepo>/Skills/QA/agentic-4c-bugfix/4c-check/SKILL.md` | `skills/4c-check/SKILL.md` |
-| `<monorepo>/Skills/QA/agentic-4c-bugfix/references/example.md` | `skills/agentic-4c-bugfix/references/example.md` |
-| `<monorepo>/Skills/QA/agentic-4c-bugfix/aqe-bridge/SKILL.md` | **(dropped — private fleet service)** |
+| Legacy `agentic-4c-bugfix` alias (forwards to `4c-bugfix`) | Legacy `skills/agentic-4c-bugfix/SKILL.md` alias during migration |
+| `<monorepo>/Skills/QA/4c-bugfix/4c-concern/SKILL.md` | `skills/4c-concern/SKILL.md` |
+| `<monorepo>/Skills/QA/4c-bugfix/4c-cause/SKILL.md` | `skills/4c-cause/SKILL.md` |
+| `<monorepo>/Skills/QA/4c-bugfix/4c-countermeasure/SKILL.md` | `skills/4c-countermeasure/SKILL.md` |
+| `<monorepo>/Skills/QA/4c-bugfix/4c-check/SKILL.md` | `skills/4c-check/SKILL.md` |
+| `<monorepo>/Skills/QA/4c-bugfix/references/example.md` | `skills/agentic-4c-bugfix/references/example.md` |
+| `<monorepo>/Skills/QA/4c-bugfix/aqe-bridge/SKILL.md` | **(dropped — private fleet service)** |
 
 ## Filter rules (apply on every projection)
 
@@ -80,6 +80,8 @@ Do **not** change these — they are the contract:
    `marketplace.json` entry must all agree.
 6. **Bump the version** in all three manifests + `CHANGELOG.md` (semver: patch
    for clarifications, minor for additive changes, major for shape changes).
+   Since 0.3.0 the plugin name is `4c-bugfix` and `agentic-4c-bugfix` is the
+   deprecated alias — keep that relationship when syncing.
 7. **Commit and push** to the public remote.
 
 ## Leak check

@@ -1,12 +1,12 @@
-# agentic-4c-bugfix
+# 4c-bugfix
 
 > A disciplined, four-gate bug-fixing methodology for coding agents — **Concern → Cause → Countermeasure → Check**.
 
-[![Version](https://img.shields.io/badge/version-0.2.0-blue)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.3.0-blue)](./CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 [![Standard: Agent Plugins](https://img.shields.io/badge/standard-Agent%20Plugins-orange)](https://worktree.ca/clocklobster/agentic-bugfix-plugin)
 
-`agentic-4c-bugfix` is an open [Agent Plugins](#compatibility) skill pack. Its
+`4c-bugfix` is an open [Agent Plugins](#compatibility) skill pack. Its
 primary orchestrator skill is `4c-bugfix`, which makes a coding agent fix bugs
 the way a careful engineer does: **reproduce first, find the root cause, fix the
 architecture (not the symptom), then prove the fix with properties, mutation,
@@ -73,7 +73,7 @@ The repo includes a `marketplace.json`, so you can add it once and install from 
   git@worktree.ca:clocklobster/agentic-bugfix-plugin.git
   ```
 
-  Then find **agentic-4c-bugfix** and click **Get** (new plugins are enabled by default).
+  Then find **4c-bugfix** and click **Get** (new plugins are enabled by default).
 
 ### Option B — install the plugin directly
 
@@ -133,11 +133,11 @@ The plugin is zero-config by default. Two conventions, both overridable:
 | Skill | Purpose |
 |---|---|
 | `4c-bugfix` | Primary orchestrator — triage, dossier, all four gates, property and mutation proof |
-| `agentic-4c-bugfix` | Compatibility alias retained during migration |
+| `agentic-4c-bugfix` | **Deprecated** legacy alias — forwards to `4c-bugfix` for one migration cycle |
 | `4c-concern` | Red gate — a committed, failing reproduction test before any source edit |
-| `4c-cause` | 5-Whys root cause + codebase-wide sibling search, written to the dossier |
+| `4c-cause` | 5-Whys root cause + violated-invariant analysis + codebase-wide sibling search, written to the dossier |
 | `4c-countermeasure` | Minimal architectural fix + every sibling repaired or explicitly deferred |
-| `4c-check` | Red-then-green proof, full suite, blast-radius re-scan, class-level hardening |
+| `4c-check` | Red-then-green proof, full suite, property/mutation proof, blast-radius re-scan, class-level hardening |
 
 A complete worked example lives in [`skills/agentic-4c-bugfix/references/example.md`](./skills/agentic-4c-bugfix/references/example.md).
 

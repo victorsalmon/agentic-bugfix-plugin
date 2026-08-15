@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-08-15
+
+### Changed
+- Plugin renamed to **`4c-bugfix`** as the primary name; the legacy
+  `agentic-4c-bugfix` skill remains as a **deprecated forwarding alias** for
+  one migration cycle (its SKILL.md now carries a forwarding notice).
+- `4c-concern` now writes a failing **property test** for general invariants
+  alongside the concrete repro; `4c-cause` now names the **violated invariant**
+  before searching siblings.
+- `4c-check` final report and the dossier template now record property-suite
+  seed, TEETH proof, changed-file and full-portfolio mutation scores, and
+  survivor dispositions.
+- Version 0.2.0 → 0.3.0 across `marketplace.json`, `.claude-plugin/plugin.json`,
+  and `.zcode-plugin/plugin.json` (all three agree).
+
 ## [0.2.0] - 2026-08-15
 
 ### Added
