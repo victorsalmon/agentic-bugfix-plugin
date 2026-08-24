@@ -4,7 +4,9 @@
 
 [![Version](https://img.shields.io/badge/version-0.3.0-blue)](./CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
-[![Standard: Agent Plugins](https://img.shields.io/badge/standard-Agent%20Plugins-orange)](https://worktree.ca/clocklobster/agentic-bugfix-plugin)
+[![Standard: Agent Plugins](https://img.shields.io/badge/standard-Agent%20Plugins-orange)](https://github.com/victorsalmon/agentic-bugfix-plugin)
+
+**One-liner:** Turn ad-hoc *"fix this"* prompts into **reproducible, red-then-green, root-cause bug fixes** — with an auditable dossier for every issue.
 
 `4c-bugfix` is an open [Agent Plugins](#compatibility) skill pack. Its
 primary orchestrator skill is `4c-bugfix`, which makes a coding agent fix bugs
@@ -50,10 +52,9 @@ Each gate is its own invocable skill, so you can run the whole loop
 
 ## Quick start
 
-1. **Install the plugin** (see [Installation](#installation)).
-2. Report a bug as you normally would: *"the totals report double-counts split payments."*
-3. The agent triggers `4c-bugfix`, triages it (non-trivial → run the loop), and walks the four gates — writing a failing test first, then RCA, then the fix, then property/mutation/regression proof.
-4. You get a fix plus a dossier recording the red repro, root cause, sibling fixes, and green proof.
+1. Report a bug as you normally would: *"the totals report double-counts split payments."*
+2. The agent triggers `4c-bugfix`, triages it (non-trivial → run the loop), and walks the four gates — writing a failing test first, then RCA, then the fix, then property/mutation/regression proof.
+3. You get a fix plus a dossier recording the red repro, root cause, sibling fixes, and green proof.
 
 You can also invoke a gate directly, e.g. `/4c-concern` to just pin a reproduction, or `/4c-check` to verify someone else's fix.
 
@@ -70,7 +71,7 @@ The repo includes a `marketplace.json`, so you can add it once and install from 
 - **Claude Code / ZCode:** *Settings → Plugin Management → Discover → `+`* → paste the Git URL:
 
   ```
-  git@worktree.ca:clocklobster/agentic-bugfix-plugin.git
+  https://github.com/victorsalmon/agentic-bugfix-plugin.git
   ```
 
   Then find **4c-bugfix** and click **Get** (new plugins are enabled by default).
@@ -80,7 +81,7 @@ The repo includes a `marketplace.json`, so you can add it once and install from 
 Clone and point your client at the directory:
 
 ```bash
-git clone git@worktree.ca:clocklobster/agentic-bugfix-plugin.git
+git clone https://github.com/victorsalmon/agentic-bugfix-plugin.git
 ```
 
 - **Claude Code:** drop the directory into your plugin path, or use your client's "install from local directory."
@@ -168,6 +169,12 @@ If you maintain a private canonical copy and want to keep this public plugin in 
 Contributions are welcome — especially new worked examples, language-specific repro patterns, and scanner integrations. See [`CONTRIBUTING.md`](./CONTRIBUTING.md).
 
 The methodology itself is intentionally small and stable; prefer improvements that make the gates clearer or more verifiable over additions that lengthen the loop.
+
+---
+
+## About
+
+This repo is maintained by **Victor Salmon** ([victorsalmon](https://github.com/victorsalmon)) as a public, portfolio-ready plugin. The 4C bug-fixing methodology and original skill pack were created by **Clock Lobster**.
 
 ---
 
