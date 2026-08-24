@@ -8,6 +8,12 @@ Thumbs.db
 *.swo
 *~
 
+# Editor directories and project files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
 # Logs
 *.log
 
