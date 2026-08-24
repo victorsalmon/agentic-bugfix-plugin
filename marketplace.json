@@ -4,14 +4,14 @@
   "description": "Single-plugin marketplace for 4c-bugfix — a disciplined, four-gate bug-fixing methodology for coding agents.",
   "owner": {
     "name": "Clock Lobster",
-    "url": "https://worktree.ca/clocklobster"
+    "url": "https://github.com/victorsalmon/agentic-bugfix-plugin"
   },
   "plugins": [
     {
       "name": "4c-bugfix",
       "description": "A disciplined, four-gate bug-fixing methodology for coding agents: Concern (failing repro) -> Cause (root cause + siblings) -> Countermeasure (fix the architecture) -> Check (red-then-green proof + hardening). Reproduce-first, regression-proof, blast-radius-free fixes.",
       "version": "0.3.0",
-      "author": { "name": "Clock Lobster", "url": "https://worktree.ca/clocklobster" },
+      "author": { "name": "Clock Lobster", "url": "https://github.com/victorsalmon/agentic-bugfix-plugin" },
       "source": ".",
       "category": "quality",
       "keywords": ["bugfix", "testing", "quality", "regression", "root-cause", "methodology", "4c", "agent-skills"],

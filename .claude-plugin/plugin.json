@@ -5,10 +5,10 @@
   "description": "A disciplined, four-gate bug-fixing methodology for coding agents: Concern (failing repro) -> Cause (root cause + siblings) -> Countermeasure (fix the architecture) -> Check (red-then-green proof + hardening). Reproduce-first, regression-proof, blast-radius-free fixes.",
   "author": {
     "name": "Clock Lobster",
-    "url": "https://worktree.ca/clocklobster"
+    "url": "https://github.com/victorsalmon/agentic-bugfix-plugin"
   },
-  "homepage": "https://worktree.ca/clocklobster/agentic-bugfix-plugin",
-  "repository": "https://worktree.ca/clocklobster/agentic-bugfix-plugin.git",
+  "homepage": "https://github.com/victorsalmon/agentic-bugfix-plugin",
+  "repository": "https://github.com/victorsalmon/agentic-bugfix-plugin.git",
   "license": "MIT",
   "keywords": [
     "bugfix",
