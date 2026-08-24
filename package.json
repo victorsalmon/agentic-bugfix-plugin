@@ -1,0 +1,33 @@
+{
+  "name": "4c-bugfix",
+  "version": "0.3.0",
+  "description": "A disciplined, four-gate bug-fixing methodology for coding agents — Concern → Cause → Countermeasure → Check.",
+  "license": "MIT",
+  "author": {
+    "name": "Victor Salmon",
+    "url": "https://github.com/victorsalmon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/victorsalmon/agentic-bugfix-plugin.git"
+  },
+  "homepage": "https://github.com/victorsalmon/agentic-bugfix-plugin",
+  "bugs": {
+    "url": "https://github.com/victorsalmon/agentic-bugfix-plugin/issues"
+  },
+  "keywords": [
+    "bugfix",
+    "testing",
+    "quality",
+    "regression",
+    "root-cause",
+    "methodology",
+    "4c",
+    "agent-skills",
+    "concern-cause-countermeasure-check"
+  ],
+  "scripts": {
+    "check": "bash scripts/check-no-private-refs.sh || node scripts/check-no-private-refs.js",
+    "validate": "node scripts/validate-json.js"
+  }
+}
