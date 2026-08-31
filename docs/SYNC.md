@@ -50,7 +50,7 @@ reference to a scanner-agnostic hook.
 |---|---|
 | `qa-suite` (a repo-specific test-suite skill name) | "the repo's test runner (`npm test` / `pytest` / `go test` / `cargo test` / a repo test skill)" |
 | `iqa-mode`, `feature-planning` (private companion skills) | generic descriptions in the adjacency table ("interactive QA / triage tools", "feature-planning tools") |
-| Internal monorepo / hostnames / `currents-bookkeeping` / `currentsbk.ca` / `salmon-orchestrator` | generic project names (`payments-service`) or removed |
+| Internal monorepo / hostnames / `currents-bookkeeping` / `currentsbk.ca` / `salmon-run` | generic project names (`payments-service`) or removed |
 | `Tasks/Manual/`, `Invoke-GitPullSafe.ps1`, `Invoke-SafeCommit.ps1` | "your team's convention" / "your issue tracker or `TODO/`" |
 | Any absolute Windows path (`C:\…`, backslash paths to private dirs) | relative / portable references |
 
@@ -92,7 +92,7 @@ hit is a private reference that leaked:
 ```bash
 grep -RInE \
   -e 'C:\\\\Repos' \
-  -e 'salmon-orchestrator' \
+  -e 'salmon-run' \
   -e 'currents-bookkeeping|currentsbk' \
   -e 'aqe|AQE|mcp_aqe|21004' \
   -e 'FLEET_API_TOKEN' \

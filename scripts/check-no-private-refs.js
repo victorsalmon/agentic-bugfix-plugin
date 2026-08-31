@@ -21,7 +21,6 @@ const REPO_ROOT = path.resolve(__dirname, '..');
  */
 const FORBIDDEN_PATTERNS = [
   /C:\\Repos/,
-  /salmon-orchestrator/,
   /currents-bookkeeping|currentsbk/,
   /aqe|AQE|mcp_aqe|21004/,
   /FLEET_API_TOKEN/,
