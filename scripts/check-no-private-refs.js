@@ -166,4 +166,15 @@ function runLeakCheck() {
   console.log('clean — no private references found');
 }
 
-runLeakCheck();
+if (require.main === module) {
+  runLeakCheck();
+}
+
+module.exports = {
+  FORBIDDEN_PATTERNS,
+  EXCLUDED_FILENAMES,
+  SCAN_TARGETS,
+  SKIPPED_DIRECTORIES,
+  collectScanFiles,
+  findLeaksInFile,
+};

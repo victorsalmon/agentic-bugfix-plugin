@@ -28,6 +28,7 @@
   ],
   "scripts": {
     "check": "bash scripts/check-no-private-refs.sh || node scripts/check-no-private-refs.js",
-    "validate": "node scripts/validate-json.js"
+    "validate": "node scripts/validate-json.js",
+    "test": "node --test \"tests/*.test.js\""
   }
 }
