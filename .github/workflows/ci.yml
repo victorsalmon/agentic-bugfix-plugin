@@ -27,3 +27,6 @@ jobs:
 
       - name: Validate JSON manifests
         run: npm run validate
+
+      - name: Run offline test suite
+        run: npm test
