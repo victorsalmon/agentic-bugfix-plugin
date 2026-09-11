@@ -21,3 +21,6 @@ Thumbs.db
 node_modules/
 dist/
 *.zip
+
+# Lane worktrees (transient salmon-run checkouts live inside the repo)
+.worktrees/
