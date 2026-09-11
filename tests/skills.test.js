@@ -19,16 +19,77 @@ function listSkillDirs() {
     .map((entry) => entry.name);
 }
 
-function readFrontmatter(skillName) {
-  const text = fs.readFileSync(path.join(SKILLS_DIR, skillName, 'SKILL.md'), 'utf8');
+function parseFrontmatter(text, label) {
   const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  assert.ok(match, `${skillName}/SKILL.md must start with YAML frontmatter`);
+  assert.ok(match, `${label}/SKILL.md must start with YAML frontmatter`);
   const frontmatter = {};
+  let blockKey = null;
+  let blockStyle = null;
+  let blockLines = [];
+  function flushBlock() {
+    if (blockKey) {
+      if (blockStyle === '>') {
+        // Folded scalar: join lines with spaces, blank lines mark paragraph breaks.
+        const paragraphs = [];
+        let current = [];
+        for (const entry of blockLines) {
+          if (entry === '') {
+            if (current.length > 0) {
+              paragraphs.push(current.join(' '));
+              current = [];
+            }
+          } else {
+            current.push(entry);
+          }
+        }
+        if (current.length > 0) paragraphs.push(current.join(' '));
+        frontmatter[blockKey] = paragraphs.join('\n').replace(/\s+/g, ' ').trim();
+        // Preserve paragraph breaks collapsed above; empty block yields ''.
+        if (blockLines.length === 0 || frontmatter[blockKey] === undefined) {
+          frontmatter[blockKey] = '';
+        }
+      } else {
+        // Literal scalar: preserve newlines.
+        frontmatter[blockKey] = blockLines.join('\n').trim();
+      }
+    }
+    blockKey = null;
+    blockStyle = null;
+    blockLines = [];
+  }
   for (const line of match[1].split(/\r?\n/)) {
     const field = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
-    if (field) frontmatter[field[1]] = field[2].trim();
+    if (field) {
+      if (blockKey) flushBlock();
+      const key = field[1];
+      const raw = field[2].trim();
+      if (/^[>|][+-]?$/.test(raw)) {
+        blockKey = key;
+        blockStyle = raw[0];
+        blockLines = [];
+      } else {
+        frontmatter[key] = raw;
+      }
+      continue;
+    }
+    if (blockKey) {
+      if (/^[ \t]+/.test(line) || line.trim() === '') {
+        const stripped = line.trim();
+        blockLines.push(stripped);
+        continue;
+      }
+      flushBlock();
+    }
   }
+  if (blockKey) flushBlock();
   return frontmatter;
+}
+
+function readFrontmatter(skillName) {
+  return parseFrontmatter(
+    fs.readFileSync(path.join(SKILLS_DIR, skillName, 'SKILL.md'), 'utf8'),
+    skillName
+  );
 }
 
 describe('skills layout', () => {
@@ -47,5 +108,29 @@ describe('skills layout', () => {
         `${skillName}/SKILL.md frontmatter description must be non-empty`
       );
     }
+  });
+});
+
+describe('frontmatter block scalars', () => {
+  it('folds > scalars into a non-empty description', () => {
+    const frontmatter = parseFrontmatter(
+      '---\nname: demo\ndescription: >\n  first line\n  second line\n---\n\n# Demo\n',
+      'demo'
+    );
+    assert.equal(frontmatter.description, 'first line second line');
+  });
+
+  it('parses an empty folded description, which fails the non-empty contract', () => {
+    const frontmatter = parseFrontmatter('---\nname: demo\ndescription: >\n---\n', 'demo');
+    assert.equal(frontmatter.description, '');
+    assert.ok(
+      !(frontmatter.description && frontmatter.description.length > 0),
+      'an empty folded description must not satisfy the non-empty contract'
+    );
+  });
+
+  it('preserves newlines for literal | scalars', () => {
+    const frontmatter = parseFrontmatter('---\ndescription: |\n  line one\n  line two\n---\n', 'demo');
+    assert.equal(frontmatter.description, 'line one\nline two');
   });
 });
