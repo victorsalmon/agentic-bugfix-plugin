@@ -1,4 +1,5 @@
 {
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "4c-bugfix",
   "version": "0.3.0",
   "description": "A disciplined, four-gate bug-fixing methodology for coding agents: Concern (failing repro) -> Cause (root cause + siblings) -> Countermeasure (fix the architecture) -> Check (red-then-green proof + hardening). Reproduce-first, regression-proof, blast-radius-free fixes.",
