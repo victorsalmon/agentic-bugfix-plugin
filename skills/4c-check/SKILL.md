@@ -4,6 +4,9 @@ description: >
   Verify a 4C bug fix, harden against the bug class, and prove a green
   regression-suite run. Use after `4c-countermeasure`. Produces the proof
   (red-then-green, full suite, blast-radius) that the fix is regression-proof.
+triggers:
+  - user
+  - model
 ---
 
 # 4C Check — Prove the fix and harden

@@ -6,6 +6,9 @@ description: >
   repair, property/invariant testing, changed-code mutation testing, and full
   regression proof. Use for non-trivial bugs, regressions, incorrect results,
   or data-handling defects.
+triggers:
+  - user
+  - model
 ---
 
 # 4C Bug Fix
