@@ -16,6 +16,7 @@ const os = require('node:os');
 const path = require('node:path');
 const {
   FORBIDDEN_PATTERNS,
+  EXCLUDED_FILENAMES,
   collectScanFiles,
   findLeaksInFile,
   formatLeak,
@@ -62,7 +63,7 @@ describe('no private references', () => {
           'patternIndex must identify the matched pattern'
         );
         assert.equal(leak.patternSource, FORBIDDEN_PATTERNS[leak.patternIndex].source);
-        assert.equal(leak.line, undefined, 'leak record must not carry raw line content');
+        assert.ok(!('line' in leak), 'leak record must not carry raw line content');
         const report = formatLeak(leak);
         assert.ok(report.includes(leak.lineNumber.toString()), 'report must contain the line number');
         assert.ok(
@@ -89,6 +90,15 @@ describe('no private references', () => {
       assert.ok(!output.includes(PLANTED_SECRET), 'assertion output must not contain raw secret text');
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('exclusion behavior is unchanged', () => {
+    assert.ok(EXCLUDED_FILENAMES.has('check-no-private-refs.sh'));
+    assert.ok(EXCLUDED_FILENAMES.has('check-no-private-refs.js'));
+    assert.ok(EXCLUDED_FILENAMES.has('SYNC.md'));
+    for (const file of collectScanFiles()) {
+      assert.ok(!EXCLUDED_FILENAMES.has(path.basename(file)), `excluded file was scanned: ${file}`);
     }
   });
 });

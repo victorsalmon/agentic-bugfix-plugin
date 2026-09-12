@@ -129,6 +129,7 @@ function* findLeaksInFile(filePath) {
 
   for (const [index, line] of lines.entries()) {
     for (const [patternIndex, pattern] of FORBIDDEN_PATTERNS.entries()) {
+      pattern.lastIndex = 0;
       if (pattern.test(line)) {
         yield { rel, lineNumber: index + 1, patternIndex, patternSource: pattern.source };
       }
