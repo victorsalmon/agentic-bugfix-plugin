@@ -115,8 +115,12 @@ function collectScanFiles() {
 /**
  * Find every line in a file that matches a forbidden pattern.
  *
+ * Never captures or returns raw line content: each leak record carries the
+ * matched pattern's index and source so reports can identify the token
+ * without echoing the secret substring.
+ *
  * @param {string} filePath - Absolute file path.
- * @returns {Generator<{rel: string, lineNumber: number, line: string}>}
+ * @returns {Generator<{rel: string, lineNumber: number, patternIndex: number, patternSource: string}>}
  */
 function* findLeaksInFile(filePath) {
   const text = fs.readFileSync(filePath, 'utf8');
@@ -124,23 +128,32 @@ function* findLeaksInFile(filePath) {
   const rel = path.relative(REPO_ROOT, filePath);
 
   for (const [index, line] of lines.entries()) {
-    for (const pattern of FORBIDDEN_PATTERNS) {
+    for (const [patternIndex, pattern] of FORBIDDEN_PATTERNS.entries()) {
+      pattern.lastIndex = 0;
       if (pattern.test(line)) {
-        yield { rel, lineNumber: index + 1, line };
+        yield { rel, lineNumber: index + 1, patternIndex, patternSource: pattern.source };
       }
     }
   }
 }
 
 /**
- * Report a single leak using the same line-oriented format as the shell version.
+ * Format a single leak without echoing raw file content.
  *
- * @param {string} rel - Path relative to the repo root.
- * @param {number} lineNumber - 1-indexed line number.
- * @param {string} line - Raw line content.
+ * @param {{rel: string, lineNumber: number, patternIndex: number, patternSource: string}} leak
+ * @returns {string}
  */
-function reportLeak(rel, lineNumber, line) {
-  console.log(`${rel}:${lineNumber}:${line}`);
+function formatLeak(leak) {
+  return `${leak.rel}:${leak.lineNumber}:pattern[${leak.patternIndex}]:${leak.patternSource}`;
+}
+
+/**
+ * Report a single leak using a redacted line-oriented format.
+ *
+ * @param {{rel: string, lineNumber: number, patternIndex: number, patternSource: string}} leak
+ */
+function reportLeak(leak) {
+  console.log(formatLeak(leak));
 }
 
 /**
@@ -153,7 +166,7 @@ function runLeakCheck() {
   for (const file of files) {
     for (const leak of findLeaksInFile(file)) {
       leaksFound = true;
-      reportLeak(leak.rel, leak.lineNumber, leak.line);
+      reportLeak(leak);
     }
   }
 
@@ -177,4 +190,6 @@ module.exports = {
   SKIPPED_DIRECTORIES,
   collectScanFiles,
   findLeaksInFile,
+  formatLeak,
+  reportLeak,
 };
