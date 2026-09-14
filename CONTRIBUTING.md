@@ -39,9 +39,9 @@ verifiability**, not feature count.
    tweaks should be separate PRs.
 3. If you change a skill's wording, re-read it end-to-end as if you were the
    agent running it — does it still guide a correct 4C loop?
-4. If you add or rename a skill, update both manifests
-   (`.claude-plugin/plugin.json` and `.zcode-plugin/plugin.json`) and the
-   README's skill table so they stay in sync.
+4. If you add or rename a skill, update all three manifests
+   (`.claude-plugin/plugin.json`, `.zcode-plugin/plugin.json`, and
+   `marketplace.json`) and the README's skill table so they stay in sync.
 5. Add a `CHANGELOG.md` entry under `[Unreleased]`.
 
 ## Projecting from a private canonical implementation

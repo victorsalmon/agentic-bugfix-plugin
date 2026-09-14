@@ -89,25 +89,10 @@ Do **not** change these — they are the contract:
 After filtering, run this from the repo root. It must report **zero** hits — any
 hit is a private reference that leaked:
 
-```bash
-grep -RInE \
-  -e 'C:\\\\Repos' \
-  -e 'salmon-run' \
-  -e 'currents-bookkeeping|currentsbk' \
-  -e 'aqe|AQE|mcp_aqe|21004' \
-  -e 'FLEET_API_TOKEN' \
-  -e 'qa-suite|iqa-mode' \
-  -e 'Tasks/(Code|Review|Complete|Manual)/' \
-  -e 'Invoke-(GitPullSafe|SafeCommit)\.ps1' \
-  skills/ docs/ README.md CHANGELOG.md CONTRIBUTING.md \
-  || echo "clean — no private references found"
-```
-
-(`docs/SYNC.md` itself contains those tokens as examples, so it is excluded from
-the check.)
-
-There is also a runnable helper: `scripts/check-no-private-refs.sh` — it exits
-non-zero if any forbidden token appears outside this doc.
+The canonical forbidden patterns and the scanned file list live in
+`scripts/check-no-private-refs.js`; `scripts/check-no-private-refs.sh` runs the
+same scan when bash is available. Run `npm run check` from the repo root — it
+exits non-zero if any forbidden token appears outside the excluded files.
 
 ## How often
 
