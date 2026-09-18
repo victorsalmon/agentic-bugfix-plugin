@@ -20,7 +20,7 @@ const REPO_ROOT = path.resolve(__dirname, '..');
  * Keep in sync with `check-no-private-refs.sh` (see docs/SYNC.md).
  */
 const FORBIDDEN_PATTERNS = [
-  /C:\\Repos/,
+  /C:\\+Repos/,
   /currents-bookkeeping|currentsbk/,
   /aqe|AQE|mcp_aqe|21004/,
   /FLEET_API_TOKEN/,

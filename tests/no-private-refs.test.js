@@ -101,4 +101,50 @@ describe('no private references', () => {
       assert.ok(!EXCLUDED_FILENAMES.has(path.basename(file)), `excluded file was scanned: ${file}`);
     }
   });
+
+  it('flags the plain single-backslash absolute path (pattern #0)', () => {
+    const { dir, file } = writeTempFixture('see C:\\Repos\\Public\\x for details\n');
+    try {
+      const leaks = [...findLeaksInFile(file)];
+      assert.ok(leaks.length >= 1, 'plain C:\\Repos form must be detected');
+      assert.ok(
+        leaks.some((leak) => leak.patternIndex === 0),
+        'plain form must match pattern #0'
+      );
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('flags the JSON-escaped double-backslash absolute path (pattern #0)', () => {
+    const { dir, file } = writeTempFixture('{"path": "C:\\\\Repos\\\\Public\\\\x"}\n');
+    try {
+      const leaks = [...findLeaksInFile(file)];
+      assert.ok(leaks.length >= 1, 'escaped C:\\\\Repos form must be detected');
+      assert.ok(
+        leaks.some((leak) => leak.patternIndex === 0),
+        'escaped form must match pattern #0'
+      );
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('redacts escaped-path leak reports (no raw line content)', () => {
+    const escapedLine = '{"path": "C:\\\\Repos\\\\Public\\\\x"}';
+    const { dir, file } = writeTempFixture(`${escapedLine}\n`);
+    try {
+      const leaks = [...findLeaksInFile(file)];
+      assert.ok(leaks.length >= 1, 'escaped fixture must produce a leak');
+      for (const leak of leaks) {
+        assert.ok(!('line' in leak), 'leak record must not carry raw line content');
+        const report = formatLeak(leak);
+        assert.ok(!report.includes(escapedLine), 'report must not echo raw line content');
+        assert.ok(report.includes(`pattern #${leak.patternIndex}`), 'report must carry pattern index');
+        assert.ok(report.includes(leak.patternSource), 'report must carry pattern source');
+      }
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
 });
