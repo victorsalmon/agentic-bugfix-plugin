@@ -1,56 +1,56 @@
 {
   "_meta": {
-    "updated": "2026-09-05",
+    "updated": "2026-09-12",
     "generator": "Gen-SkillsIndex.ps1 (frontmatter name/description)",
-    "root": "C:\\Repos\\Public\\agentic-bugfix-plugin\\skills",
+    "root": "skills",
     "description": "Per-folder skill inventory. Trust this over tables copied into docs. Status: active = SKILL.md present; family = nested skills only; stale/deprecated only when marked."
   },
   "skills": [
     {
       "name": "4c-bugfix",
       "description": "Run a rigorous Concern-Cause-Countermeasure-Check bug fix with a committed failing reproduction, root-cause and sibling analysis, an architectural repair, property/invariant testing, changed-code mutation testing, and...",
-      "path": "C:\\Repos\\Public\\agentic-bugfix-plugin\\skills\\4c-bugfix",
-      "entry": "C:\\Repos\\Public\\agentic-bugfix-plugin\\skills\\4c-bugfix\\SKILL.md",
+      "path": "skills/4c-bugfix",
+      "entry": "skills/4c-bugfix/SKILL.md",
       "status": "active",
       "subskills": 0
     },
     {
       "name": "4c-cause",
       "description": "Find the root cause of a bug with 5-Whys and a codebase-wide anti-pattern search, and record it in the 4C dossier. Use after `4c-concern` has produced a committed failing test. Never start fixing until Cause is docume...",
-      "path": "C:\\Repos\\Public\\agentic-bugfix-plugin\\skills\\4c-cause",
-      "entry": "C:\\Repos\\Public\\agentic-bugfix-plugin\\skills\\4c-cause\\SKILL.md",
+      "path": "skills/4c-cause",
+      "entry": "skills/4c-cause/SKILL.md",
       "status": "active",
       "subskills": 0
     },
     {
       "name": "4c-check",
       "description": "Verify a 4C bug fix, harden against the bug class, and prove a green regression-suite run. Use after `4c-countermeasure`. Produces the proof (red-then-green, full suite, blast-radius) that the fix is regression-proof.",
-      "path": "C:\\Repos\\Public\\agentic-bugfix-plugin\\skills\\4c-check",
-      "entry": "C:\\Repos\\Public\\agentic-bugfix-plugin\\skills\\4c-check\\SKILL.md",
+      "path": "skills/4c-check",
+      "entry": "skills/4c-check/SKILL.md",
       "status": "active",
       "subskills": 0
     },
     {
       "name": "4c-concern",
       "description": "Red gate of the 4C pattern — pin the failure by writing and committing a failing reproduction test before any application source is modified. Use when starting any non-trivial bug fix, when the reproduction is unclear...",
-      "path": "C:\\Repos\\Public\\agentic-bugfix-plugin\\skills\\4c-concern",
-      "entry": "C:\\Repos\\Public\\agentic-bugfix-plugin\\skills\\4c-concern\\SKILL.md",
+      "path": "skills/4c-concern",
+      "entry": "skills/4c-concern/SKILL.md",
       "status": "active",
       "subskills": 0
     },
     {
       "name": "4c-countermeasure",
       "description": "Implement the architectural fix for a bug and repair every in-scope sibling occurrence identified by 4c-cause. Use after `4c-cause` has documented the root cause. Fix the cause, never the symptom.",
-      "path": "C:\\Repos\\Public\\agentic-bugfix-plugin\\skills\\4c-countermeasure",
-      "entry": "C:\\Repos\\Public\\agentic-bugfix-plugin\\skills\\4c-countermeasure\\SKILL.md",
+      "path": "skills/4c-countermeasure",
+      "entry": "skills/4c-countermeasure/SKILL.md",
       "status": "active",
       "subskills": 0
     },
     {
       "name": "agentic-4c-bugfix",
       "description": "Orchestrate a disciplined 4C (Concern-Cause-Countermeasure-Check) bug fix that is reproduced, root-caused, blast-radius-free, and regression-tested. Use when the user reports a bug, says \"fix this\", \"why is X broken\",...",
-      "path": "C:\\Repos\\Public\\agentic-bugfix-plugin\\skills\\agentic-4c-bugfix",
-      "entry": "C:\\Repos\\Public\\agentic-bugfix-plugin\\skills\\agentic-4c-bugfix\\SKILL.md",
+      "path": "skills/agentic-4c-bugfix",
+      "entry": "skills/agentic-4c-bugfix/SKILL.md",
       "status": "active",
       "subskills": 0
     }
