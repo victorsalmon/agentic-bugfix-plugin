@@ -111,6 +111,46 @@ describe('skills layout', () => {
   });
 });
 
+describe('skills index parity', () => {
+  const indexPath = path.join(SKILLS_DIR, 'skills-index.json');
+
+  function readIndex() {
+    return JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+  }
+
+  it('indexes every skill directory exactly once and no stale entries', () => {
+    const index = readIndex();
+    assert.equal(index._meta.root, 'skills', 'index _meta.root must be "skills"');
+    const indexed = index.skills.map((skill) => skill.name);
+    assert.deepEqual(
+      [...indexed].sort(),
+      [...listSkillDirs()].sort(),
+      'skills-index.json must list exactly the skill directories on disk',
+    );
+  });
+
+  it('every index entry points at an existing active SKILL.md', () => {
+    for (const skill of readIndex().skills) {
+      assert.equal(
+        skill.path,
+        `skills/${skill.name}`,
+        `${skill.name} path must be relative to root`,
+      );
+      assert.equal(
+        skill.entry,
+        `skills/${skill.name}/SKILL.md`,
+        `${skill.name} entry must point at its SKILL.md`,
+      );
+      assert.equal(skill.status, 'active', `${skill.name} must be active`);
+      assert.ok(
+        fs.existsSync(path.join(SKILLS_DIR, skill.name, 'SKILL.md')),
+        `${skill.name} entry file must exist`,
+      );
+      assert.ok(skill.description && skill.description.length > 0, `${skill.name} needs a summary`);
+    }
+  });
+});
+
 describe('frontmatter block scalars', () => {
   it('folds > scalars into a non-empty description', () => {
     const frontmatter = parseFrontmatter(

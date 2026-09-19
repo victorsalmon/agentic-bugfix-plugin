@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "updated": "2026-09-12",
-    "generator": "Gen-SkillsIndex.ps1 (frontmatter name/description)",
+    "updated": "2026-09-19",
+    "generator": "derived from skills/<name>/SKILL.md frontmatter (name, description)",
     "root": "skills",
     "description": "Per-folder skill inventory. Trust this over tables copied into docs. Status: active = SKILL.md present; family = nested skills only; stale/deprecated only when marked."
   },
