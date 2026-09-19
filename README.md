@@ -4,9 +4,9 @@
 
 [![Version](https://img.shields.io/badge/version-0.3.0-blue)](./CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
-[![Standard: Agent Plugins](https://img.shields.io/badge/standard-Agent%20Plugins-orange)](https://github.com/victorsalmon/agentic-bugfix-plugin)
+[![Standard: Agent Plugins](https://img.shields.io/badge/standard-Agent%20Plugins-orange)](./README.md#compatibility)
 
-**One-liner:** Turn ad-hoc *"fix this"* prompts into **reproducible, red-then-green, root-cause bug fixes** — with an auditable dossier for every issue.
+**One-liner:** Turn ad-hoc _"fix this"_ prompts into **reproducible, red-then-green, root-cause bug fixes** — with an auditable dossier for every issue.
 
 `4c-bugfix` is an open [Agent Plugins](#compatibility) skill pack. Its
 primary orchestrator skill is `4c-bugfix`, which makes a coding agent fix bugs
@@ -52,7 +52,7 @@ Each gate is its own invocable skill, so you can run the whole loop
 
 ## Quick start
 
-1. Report a bug as you normally would: *"the totals report double-counts split payments."*
+1. Report a bug as you normally would: _"the totals report double-counts split payments."_
 2. The agent triggers `4c-bugfix`, triages it (non-trivial → run the loop), and walks the four gates — writing a failing test first, then RCA, then the fix, then property/mutation/regression proof.
 3. You get a fix plus a dossier recording the red repro, root cause, sibling fixes, and green proof.
 
@@ -68,7 +68,7 @@ This repo follows the open **Agent Plugins** standard, so it installs into any c
 
 The repo includes a `marketplace.json`, so you can add it once and install from your client's plugin browser.
 
-- **Claude Code / ZCode:** *Settings → Plugin Management → Discover → `+`* → paste the Git URL:
+- **Claude Code / ZCode:** _Settings → Plugin Management → Discover → `+`_ → paste the Git URL:
 
   ```
   https://github.com/victorsalmon/agentic-bugfix-plugin.git
@@ -103,16 +103,20 @@ done
 ## How it works
 
 ### Triage
+
 Every invocation starts with a triage table. Trivial changes (typo, config value, CSS tweak, no logic change) are fixed directly with a `4C skipped — trivial` note. Everything else runs the full loop.
 
 ### The dossier
+
 A full loop writes `.4c/<bug-id>.md` in the project root with four sections — Concern / Cause / Countermeasure / Check. Each gate appends its outputs (failing-test path + output, root-cause paragraph, sibling list, fix SHAs, green proof). This is how state moves between gates when they run in different sub-agents or sessions, and it gives you an auditable record. Prefer a different location (`docs/fixes/`, a ticket dir)? Use it — just stay consistent.
 
 ### The red gate (verifiable)
+
 The Concern gate commits the failing test **on its own** (`test: add failing repro for <bug>`). The Check gate then verifies in `git log` that the RED test commit precedes the fix commit, and re-confirms the test fails without the fix (`git stash` + rerun). This turns "reproduce first" from an aspiration into a checkable gate.
 
 ### Optional quality-scan gate
-Each gate has an *optional* scan step. Wire in whatever you already use — a custom quality engine, SonarQube, CodeQL, Semgrep, an MCP-served analyzer. Scans are **advisory and non-blocking**: if nothing is wired up, the agent records "scanner unavailable" and continues. The methodology never depends on a paid or private tool.
+
+Each gate has an _optional_ scan step. Wire in whatever you already use — a custom quality engine, SonarQube, CodeQL, Semgrep, an MCP-served analyzer. Scans are **advisory and non-blocking**: if nothing is wired up, the agent records "scanner unavailable" and continues. The methodology never depends on a paid or private tool.
 
 ---
 
@@ -120,10 +124,10 @@ Each gate has an *optional* scan step. Wire in whatever you already use — a cu
 
 The plugin is zero-config by default. Two conventions, both overridable:
 
-| Setting | Default | Override |
-|---|---|---|
-| Dossier directory | `.4c/` in the project root | Use your team's preferred fix-record location |
-| Quality scanner | none (gates record "scanner unavailable") | Drop in any scanner; the gates call it where noted |
+| Setting           | Default                                   | Override                                           |
+| ----------------- | ----------------------------------------- | -------------------------------------------------- |
+| Dossier directory | `.4c/` in the project root                | Use your team's preferred fix-record location      |
+| Quality scanner   | none (gates record "scanner unavailable") | Drop in any scanner; the gates call it where noted |
 
 `.4c/` is gitignore-friendly (see `.gitignore`).
 
@@ -131,14 +135,14 @@ The plugin is zero-config by default. Two conventions, both overridable:
 
 ## Skills included
 
-| Skill | Purpose |
-|---|---|
-| `4c-bugfix` | Primary orchestrator — triage, dossier, all four gates, property and mutation proof |
-| `agentic-4c-bugfix` | **Deprecated** legacy alias — forwards to `4c-bugfix` for one migration cycle |
-| `4c-concern` | Red gate — a committed, failing reproduction test before any source edit |
-| `4c-cause` | 5-Whys root cause + violated-invariant analysis + codebase-wide sibling search, written to the dossier |
-| `4c-countermeasure` | Minimal architectural fix + every sibling repaired or explicitly deferred |
-| `4c-check` | Red-then-green proof, full suite, property/mutation proof, blast-radius re-scan, class-level hardening |
+| Skill               | Purpose                                                                                                |
+| ------------------- | ------------------------------------------------------------------------------------------------------ |
+| `4c-bugfix`         | Primary orchestrator — triage, dossier, all four gates, property and mutation proof                    |
+| `agentic-4c-bugfix` | **Deprecated** legacy alias — forwards to `4c-bugfix` for one migration cycle                          |
+| `4c-concern`        | Red gate — a committed, failing reproduction test before any source edit                               |
+| `4c-cause`          | 5-Whys root cause + violated-invariant analysis + codebase-wide sibling search, written to the dossier |
+| `4c-countermeasure` | Minimal architectural fix + every sibling repaired or explicitly deferred                              |
+| `4c-check`          | Red-then-green proof, full suite, property/mutation proof, blast-radius re-scan, class-level hardening |
 
 A complete worked example lives in [`skills/agentic-4c-bugfix/references/example.md`](./skills/agentic-4c-bugfix/references/example.md).
 
