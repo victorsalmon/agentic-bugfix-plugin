@@ -22,6 +22,8 @@ const {
   formatLeak,
 } = require('../scripts/check-no-private-refs.js');
 
+const REPO_ROOT = path.resolve(__dirname, '..');
+
 const PLANTED_SECRET = 'FLEET_API_TOKEN=x';
 
 function writeTempFixture(content) {
@@ -38,6 +40,31 @@ describe('no private references', () => {
 
   it('scanner covers at least one file', () => {
     assert.ok(collectScanFiles().length > 0, 'collectScanFiles() must not be empty');
+  });
+
+  it('scans the whole tree, including manifests, examples, and CI config', () => {
+    const scanned = collectScanFiles().map((file) =>
+      path.relative(REPO_ROOT, file).split(path.sep).join('/'),
+    );
+    for (const expected of [
+      'package.json',
+      'SECURITY.md',
+      'CODE_OF_CONDUCT.md',
+      'examples/usage.md',
+      '.github/workflows/ci.yml',
+      'tests/manifests.test.js',
+    ]) {
+      assert.ok(scanned.includes(expected), `expected scan coverage for ${expected}`);
+    }
+  });
+
+  it('never scans skipped directories', () => {
+    for (const file of collectScanFiles()) {
+      const segments = path.relative(REPO_ROOT, file).split(path.sep);
+      for (const skipped of ['.git', 'node_modules', '.worktrees', '.4c', 'dist', 'coverage']) {
+        assert.ok(!segments.includes(skipped), `skipped directory was scanned: ${file}`);
+      }
+    }
   });
 
   it('no scanned file contains a forbidden private reference', () => {

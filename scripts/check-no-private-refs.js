@@ -31,33 +31,30 @@ const FORBIDDEN_PATTERNS = [
 
 /**
  * Files that legitimately mention the forbidden tokens: the scanner scripts
- * themselves and the sync documentation that lists them as examples.
+ * themselves, the sync documentation that lists them as examples, and the
+ * scanner's own test, which must contain planted token shapes to prove the
+ * detection and redaction behaviour.
  */
 const EXCLUDED_FILENAMES = new Set([
   'check-no-private-refs.sh',
   'check-no-private-refs.js',
   'SYNC.md',
+  'no-private-refs.test.js',
 ]);
 
 /**
- * Directories and files to scan, relative to the repo root.
+ * Directories that are not project source and should never be scanned:
+ * VCS metadata, installed dependencies, salmon-run lane worktrees, local
+ * dossiers, and build output.
  */
-const SCAN_TARGETS = [
-  'skills',
-  'docs',
-  'scripts',
-  'README.md',
-  'CHANGELOG.md',
-  'CONTRIBUTING.md',
-  '.claude-plugin',
-  '.zcode-plugin',
-  'marketplace.json',
-];
-
-/**
- * Directories that are not project source and should never be scanned.
- */
-const SKIPPED_DIRECTORIES = new Set(['.git', 'node_modules']);
+const SKIPPED_DIRECTORIES = new Set([
+  '.git',
+  'node_modules',
+  '.worktrees',
+  '.4c',
+  'dist',
+  'coverage',
+]);
 
 /**
  * Recursively list regular files under a directory, skipping `SKIPPED_DIRECTORIES`.
@@ -90,24 +87,17 @@ function isExcludedFile(filePath) {
 /**
  * Collect every file that the leak check should examine.
  *
- * @returns {string[]} Absolute file paths, in scan-target order.
+ * Scans the whole repository tree rather than a hand-maintained allowlist, so
+ * a new file (a manifest, a workflow, an example) is guarded by default. Only
+ * `SKIPPED_DIRECTORIES` and `EXCLUDED_FILENAMES` are omitted.
+ *
+ * @returns {string[]} Absolute file paths, in directory-walk order.
  */
 function collectScanFiles() {
   const files = [];
-  for (const rel of SCAN_TARGETS) {
-    const full = path.join(REPO_ROOT, rel);
-    if (!fs.existsSync(full)) continue;
-
-    const stat = fs.statSync(full);
-    if (stat.isDirectory()) {
-      for (const file of walkDirectoryTree(full)) {
-        if (isExcludedFile(file)) continue;
-        files.push(file);
-      }
-    } else if (stat.isFile()) {
-      if (isExcludedFile(full)) continue;
-      files.push(full);
-    }
+  for (const file of walkDirectoryTree(REPO_ROOT)) {
+    if (isExcludedFile(file)) continue;
+    files.push(file);
   }
   return files;
 }
@@ -186,7 +176,6 @@ if (require.main === module) {
 module.exports = {
   FORBIDDEN_PATTERNS,
   EXCLUDED_FILENAMES,
-  SCAN_TARGETS,
   SKIPPED_DIRECTORIES,
   collectScanFiles,
   findLeaksInFile,

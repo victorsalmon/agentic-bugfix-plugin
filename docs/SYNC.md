@@ -89,10 +89,12 @@ Do **not** change these — they are the contract:
 After filtering, run this from the repo root. It must report **zero** hits — any
 hit is a private reference that leaked:
 
-The canonical forbidden patterns and the scanned file list live in
-`scripts/check-no-private-refs.js`; `scripts/check-no-private-refs.sh` runs the
-same scan when bash is available. Run `npm run check` from the repo root — it
-exits non-zero if any forbidden token appears outside the excluded files.
+The canonical forbidden patterns and the scan skip/exclusion lists live in
+`scripts/check-no-private-refs.js`; the scan covers the whole repository tree
+(minus VCS metadata, dependencies, lane worktrees, dossiers, and build output),
+so new files are guarded by default. `scripts/check-no-private-refs.sh` runs
+the same scan when bash is available. Run `npm run check` from the repo root —
+it exits non-zero if any forbidden token appears outside the excluded files.
 
 ## How often
 
