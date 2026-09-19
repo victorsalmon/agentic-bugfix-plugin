@@ -22,8 +22,11 @@ node_modules/
 dist/
 *.zip
 
-# Lane worktrees (transient salmon-run checkouts live inside the repo)
+# Transient lane state (worktrees, pre-repair snapshots, quarantined paths) -
+# never committed
 .worktrees/
+.backup/
+.quarantine/
 
 # Local install artifact - no lockfile is committed for this plugin
 package-lock.json
