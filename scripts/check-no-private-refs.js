@@ -26,7 +26,7 @@ const FORBIDDEN_PATTERNS = [
   /FLEET_API_TOKEN/,
   /qa-suite|iqa-mode/,
   /Tasks\/(Code|Review|Complete|Manual)\//,
-  /Invoke-(GitPullSafe|SafeCommit)\.ps1/
+  /Invoke-(GitPullSafe|SafeCommit)\.ps1/,
 ];
 
 /**
@@ -36,7 +36,7 @@ const FORBIDDEN_PATTERNS = [
 const EXCLUDED_FILENAMES = new Set([
   'check-no-private-refs.sh',
   'check-no-private-refs.js',
-  'SYNC.md'
+  'SYNC.md',
 ]);
 
 /**
@@ -51,7 +51,7 @@ const SCAN_TARGETS = [
   'CONTRIBUTING.md',
   '.claude-plugin',
   '.zcode-plugin',
-  'marketplace.json'
+  'marketplace.json',
 ];
 
 /**

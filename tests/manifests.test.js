@@ -50,7 +50,7 @@ describe('marketplace.json', () => {
       assert.ok(plugin.name, 'marketplace plugin entry missing required field: name');
       assert.ok(
         plugin.description && plugin.description.length > 0,
-        `marketplace plugin "${plugin.name}" missing non-empty description`
+        `marketplace plugin "${plugin.name}" missing non-empty description`,
       );
     }
   });
@@ -66,7 +66,11 @@ describe('version sync', () => {
     assert.equal(zcode.version, pkg.version, '.zcode-plugin/plugin.json version drift');
     for (const plugin of marketplace.plugins) {
       if (plugin.version) {
-        assert.equal(plugin.version, pkg.version, `marketplace plugin "${plugin.name}" version drift`);
+        assert.equal(
+          plugin.version,
+          pkg.version,
+          `marketplace plugin "${plugin.name}" version drift`,
+        );
       }
     }
   });

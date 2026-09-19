@@ -88,7 +88,7 @@ function parseFrontmatter(text, label) {
 function readFrontmatter(skillName) {
   return parseFrontmatter(
     fs.readFileSync(path.join(SKILLS_DIR, skillName, 'SKILL.md'), 'utf8'),
-    skillName
+    skillName,
   );
 }
 
@@ -105,7 +105,7 @@ describe('skills layout', () => {
       assert.equal(frontmatter.name, skillName, `${skillName}/SKILL.md frontmatter name mismatch`);
       assert.ok(
         frontmatter.description && frontmatter.description.length > 0,
-        `${skillName}/SKILL.md frontmatter description must be non-empty`
+        `${skillName}/SKILL.md frontmatter description must be non-empty`,
       );
     }
   });
@@ -115,7 +115,7 @@ describe('frontmatter block scalars', () => {
   it('folds > scalars into a non-empty description', () => {
     const frontmatter = parseFrontmatter(
       '---\nname: demo\ndescription: >\n  first line\n  second line\n---\n\n# Demo\n',
-      'demo'
+      'demo',
     );
     assert.equal(frontmatter.description, 'first line second line');
   });
@@ -125,12 +125,15 @@ describe('frontmatter block scalars', () => {
     assert.equal(frontmatter.description, '');
     assert.ok(
       !(frontmatter.description && frontmatter.description.length > 0),
-      'an empty folded description must not satisfy the non-empty contract'
+      'an empty folded description must not satisfy the non-empty contract',
     );
   });
 
   it('preserves newlines for literal | scalars', () => {
-    const frontmatter = parseFrontmatter('---\ndescription: |\n  line one\n  line two\n---\n', 'demo');
+    const frontmatter = parseFrontmatter(
+      '---\ndescription: |\n  line one\n  line two\n---\n',
+      'demo',
+    );
     assert.equal(frontmatter.description, 'line one\nline two');
   });
 });

@@ -1,0 +1,9 @@
+node_modules/
+.worktrees/
+.4c/
+dist/
+*.zip
+
+# Generated artifacts with their own producers
+package-lock.json
+skills/skills-index.json

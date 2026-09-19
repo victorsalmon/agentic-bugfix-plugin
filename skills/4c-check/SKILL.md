@@ -17,7 +17,7 @@ silently recur.
 1. **Re-run the Concern repro test.** Confirm GREEN. Paste output into the
    dossier Check section.
 2. **Verify the red gate.** Confirm the repro test's commit (`test: add failing
-   repro …` from `4c-concern`) precedes the fix commit in `git log`, and that the
+repro …` from `4c-concern`) precedes the fix commit in `git log`, and that the
    test was actually RED without the fix — `git stash` the fix (or check out the
    test commit) and re-run the test to see it fail. If you cannot show
    red-then-green, the gate failed; do not claim the fix is done.
@@ -49,11 +49,12 @@ silently recur.
    scan and a secret/PII scan on the changed files, and a docs/contract scan on
    anything the fix touched. Record findings (or "scanner unavailable: <reason>").
 10. **Final report** in the dossier Check section (mirrored in the commit message
-   / PR description / handoff — whichever the repo uses):
-   - Proof the repro test was RED before the fix (commit SHA + output).
-   - One-paragraph root cause (from Cause).
-   - Proof the repro test + full suite are GREEN after the fix.
-   - Property seed/results, changed-file and full-portfolio mutation scores,
-     and every surviving mutant with its disposition.
-   - Blast-radius result and any out-of-scope risks.
-   - Scan findings and whether a scanner was available.
+    / PR description / handoff — whichever the repo uses):
+
+- Proof the repro test was RED before the fix (commit SHA + output).
+- One-paragraph root cause (from Cause).
+- Proof the repro test + full suite are GREEN after the fix.
+- Property seed/results, changed-file and full-portfolio mutation scores,
+  and every surviving mutant with its disposition.
+- Blast-radius result and any out-of-scope risks.
+- Scan findings and whether a scanner was available.

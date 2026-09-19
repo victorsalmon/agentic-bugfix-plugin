@@ -24,7 +24,7 @@ const MANIFEST_DEFINITIONS = [
   { file: 'package.json', required: ['name', 'version', 'license', 'repository'] },
   { file: '.claude-plugin/plugin.json', required: ['name', 'version', 'description', 'license'] },
   { file: '.zcode-plugin/plugin.json', required: ['name', 'version', 'description', 'license'] },
-  { file: 'marketplace.json', required: ['name', 'plugins'] }
+  { file: 'marketplace.json', required: ['name', 'plugins'] },
 ];
 
 /**
@@ -85,7 +85,7 @@ function validateMarketplacePlugins(relativePath, plugins) {
     const missing = getMissingKeys(plugin, PLUGIN_REQUIRED_FIELDS);
     if (missing.length) {
       console.error(
-        `FAIL: ${relativePath} plugin[${index}] missing required field(s): ${missing.join(', ')}`
+        `FAIL: ${relativePath} plugin[${index}] missing required field(s): ${missing.join(', ')}`,
       );
       allPluginsValid = false;
     }

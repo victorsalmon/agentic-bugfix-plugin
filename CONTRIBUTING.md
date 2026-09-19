@@ -34,7 +34,7 @@ verifiability**, not feature count.
 ## How to propose a change
 
 1. Open an issue first for anything beyond a typo or docs fix — a short sketch
-   of the change and *why* lets us agree before you do the work.
+   of the change and _why_ lets us agree before you do the work.
 2. Keep a PR to one concern. Methodology changes, new examples, and tooling
    tweaks should be separate PRs.
 3. If you change a skill's wording, re-read it end-to-end as if you were the

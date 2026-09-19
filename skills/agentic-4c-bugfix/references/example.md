@@ -13,7 +13,7 @@ Repo: `payments-service` — branch `fix/split-double-count`.
 ## Concern (RED)
 
 - **Failure in one sentence:** When a payment is split into multiple categories,
-  `getCategoryTotals()` sums each split leg against the *full* payment amount
+  `getCategoryTotals()` sums each split leg against the _full_ payment amount
   instead of the leg amount, so totals are multiplied by the number of legs.
 - **Layer chosen:** unit test at the aggregation layer — the bug is pure logic,
   no I/O or UI needed.
@@ -21,7 +21,13 @@ Repo: `payments-service` — branch `fix/split-double-count`.
 
 ```ts
 it('counts each split leg at its own amount, not the parent total', () => {
-  const pmt = splitPayment({ amount: 100, legs: [{ cat: 'food', amount: 60 }, { cat: 'fuel', amount: 40 }] });
+  const pmt = splitPayment({
+    amount: 100,
+    legs: [
+      { cat: 'food', amount: 60 },
+      { cat: 'fuel', amount: 40 },
+    ],
+  });
   expect(getCategoryTotals([pmt])).toEqual({ food: 60, fuel: 40 });
 });
 ```

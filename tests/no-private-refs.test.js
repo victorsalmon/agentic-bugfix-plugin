@@ -60,15 +60,18 @@ describe('no private references', () => {
         assert.equal(typeof leak.patternIndex, 'number');
         assert.ok(
           leak.patternIndex >= 0 && leak.patternIndex < FORBIDDEN_PATTERNS.length,
-          'patternIndex must identify the matched pattern'
+          'patternIndex must identify the matched pattern',
         );
         assert.equal(leak.patternSource, FORBIDDEN_PATTERNS[leak.patternIndex].source);
         assert.ok(!('line' in leak), 'leak record must not carry raw line content');
         const report = formatLeak(leak);
-        assert.ok(report.includes(leak.lineNumber.toString()), 'report must contain the line number');
+        assert.ok(
+          report.includes(leak.lineNumber.toString()),
+          'report must contain the line number',
+        );
         assert.ok(
           report.includes(`pattern #${leak.patternIndex}`),
-          'report must contain the matched pattern index'
+          'report must contain the matched pattern index',
         );
         assert.ok(report.includes(leak.patternSource), 'report must contain the pattern source');
         assert.ok(!report.includes(PLANTED_SECRET), 'report must not echo the matched secret');
@@ -87,7 +90,10 @@ describe('no private references', () => {
       }
       assert.ok(leaks.length > 0, 'planted forbidden token must be detected (fail closed)');
       const output = `private references found:\n${leaks.join('\n')}`;
-      assert.ok(!output.includes(PLANTED_SECRET), 'assertion output must not contain raw secret text');
+      assert.ok(
+        !output.includes(PLANTED_SECRET),
+        'assertion output must not contain raw secret text',
+      );
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }
@@ -109,7 +115,7 @@ describe('no private references', () => {
       assert.ok(leaks.length >= 1, 'plain C:\\Repos form must be detected');
       assert.ok(
         leaks.some((leak) => leak.patternIndex === 0),
-        'plain form must match pattern #0'
+        'plain form must match pattern #0',
       );
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
@@ -123,7 +129,7 @@ describe('no private references', () => {
       assert.ok(leaks.length >= 1, 'escaped C:\\\\Repos form must be detected');
       assert.ok(
         leaks.some((leak) => leak.patternIndex === 0),
-        'escaped form must match pattern #0'
+        'escaped form must match pattern #0',
       );
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
@@ -140,7 +146,10 @@ describe('no private references', () => {
         assert.ok(!('line' in leak), 'leak record must not carry raw line content');
         const report = formatLeak(leak);
         assert.ok(!report.includes(escapedLine), 'report must not echo raw line content');
-        assert.ok(report.includes(`pattern #${leak.patternIndex}`), 'report must carry pattern index');
+        assert.ok(
+          report.includes(`pattern #${leak.patternIndex}`),
+          'report must carry pattern index',
+        );
         assert.ok(report.includes(leak.patternSource), 'report must carry pattern source');
       }
     } finally {

@@ -10,16 +10,16 @@ remote. This document is the checklist.
 
 ## The mapping
 
-| Canonical (private) | Public (this repo) |
-|---|---|
-| `<monorepo>/Skills/QA/4c-bugfix/SKILL.md` | `skills/4c-bugfix/SKILL.md` |
-| Legacy `agentic-4c-bugfix` alias (forwards to `4c-bugfix`) | Legacy `skills/agentic-4c-bugfix/SKILL.md` alias during migration |
-| `<monorepo>/Skills/QA/4c-bugfix/4c-concern/SKILL.md` | `skills/4c-concern/SKILL.md` |
-| `<monorepo>/Skills/QA/4c-bugfix/4c-cause/SKILL.md` | `skills/4c-cause/SKILL.md` |
-| `<monorepo>/Skills/QA/4c-bugfix/4c-countermeasure/SKILL.md` | `skills/4c-countermeasure/SKILL.md` |
-| `<monorepo>/Skills/QA/4c-bugfix/4c-check/SKILL.md` | `skills/4c-check/SKILL.md` |
-| `<monorepo>/Skills/QA/4c-bugfix/references/example.md` | `skills/agentic-4c-bugfix/references/example.md` |
-| `<monorepo>/Skills/QA/4c-bugfix/aqe-bridge/SKILL.md` | **(dropped — private fleet service)** |
+| Canonical (private)                                         | Public (this repo)                                                |
+| ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| `<monorepo>/Skills/QA/4c-bugfix/SKILL.md`                   | `skills/4c-bugfix/SKILL.md`                                       |
+| Legacy `agentic-4c-bugfix` alias (forwards to `4c-bugfix`)  | Legacy `skills/agentic-4c-bugfix/SKILL.md` alias during migration |
+| `<monorepo>/Skills/QA/4c-bugfix/4c-concern/SKILL.md`        | `skills/4c-concern/SKILL.md`                                      |
+| `<monorepo>/Skills/QA/4c-bugfix/4c-cause/SKILL.md`          | `skills/4c-cause/SKILL.md`                                        |
+| `<monorepo>/Skills/QA/4c-bugfix/4c-countermeasure/SKILL.md` | `skills/4c-countermeasure/SKILL.md`                               |
+| `<monorepo>/Skills/QA/4c-bugfix/4c-check/SKILL.md`          | `skills/4c-check/SKILL.md`                                        |
+| `<monorepo>/Skills/QA/4c-bugfix/references/example.md`      | `skills/agentic-4c-bugfix/references/example.md`                  |
+| `<monorepo>/Skills/QA/4c-bugfix/aqe-bridge/SKILL.md`        | **(dropped — private fleet service)**                             |
 
 ## Filter rules (apply on every projection)
 
@@ -28,8 +28,8 @@ what to find; the right is what to replace it with.
 
 ### 1. Dossier path
 
-| Find | Replace |
-|---|---|
+| Find                                                                                                                                               | Replace                                                                                                               |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | Absolute dossier path under the monorepo's task queue (e.g. `…/Tasks/Code/<bug-id>-4c.md`, with its `Tasks/Review/` / `Tasks/Complete/` move note) | `.4c/<bug-id>.md` relative to the project root (keep the "move alongside the fix when done" idea, expressed portably) |
 
 ### 2. AQE / private quality engine → scanner-agnostic
@@ -38,21 +38,21 @@ The canonical version has a whole `aqe-bridge` skill wired to a private local
 service. **Drop the skill entirely**, and downgrade every "Optional AQE gate"
 reference to a scanner-agnostic hook.
 
-| Find | Replace |
-|---|---|
-| `aqe-bridge` skill (the whole file) | (do not copy it) |
+| Find                                                                                                                                          | Replace                                                                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `aqe-bridge` skill (the whole file)                                                                                                           | (do not copy it)                                                                                                                                                              |
 | "Optional AQE gate: call `defect_predict` / `quality_assess` / `qe_security_url-validate` / `validation_pipeline` via the `aqe-bridge` skill" | "Optional quality-scan gate: run your scanner (a custom quality engine, SonarQube, CodeQL, Semgrep, an MCP-served analyzer, …) and record findings, or 'scanner unavailable'" |
-| `localhost:21004`, `mcp_aqe`, `FLEET_API_TOKEN_*`, `aqe.ts`, `createAqeClient`, `Resolve-AqeBridgeUrl.ps1` | (must not appear at all) |
+| `localhost:21004`, `mcp_aqe`, `FLEET_API_TOKEN_*`, `aqe.ts`, `createAqeClient`, `Resolve-AqeBridgeUrl.ps1`                                    | (must not appear at all)                                                                                                                                                      |
 
 ### 3. Environment-specific repos / tools → generic
 
-| Find | Replace |
-|---|---|
-| `qa-suite` (a repo-specific test-suite skill name) | "the repo's test runner (`npm test` / `pytest` / `go test` / `cargo test` / a repo test skill)" |
-| `iqa-mode`, `feature-planning` (private companion skills) | generic descriptions in the adjacency table ("interactive QA / triage tools", "feature-planning tools") |
-| Internal monorepo / hostnames / `currents-bookkeeping` / `currentsbk.ca` / `salmon-run` | generic project names (`payments-service`) or removed |
-| `Tasks/Manual/`, `Invoke-GitPullSafe.ps1`, `Invoke-SafeCommit.ps1` | "your team's convention" / "your issue tracker or `TODO/`" |
-| Any absolute Windows path (`C:\…`, backslash paths to private dirs) | relative / portable references |
+| Find                                                                                    | Replace                                                                                                 |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `qa-suite` (a repo-specific test-suite skill name)                                      | "the repo's test runner (`npm test` / `pytest` / `go test` / `cargo test` / a repo test skill)"         |
+| `iqa-mode`, `feature-planning` (private companion skills)                               | generic descriptions in the adjacency table ("interactive QA / triage tools", "feature-planning tools") |
+| Internal monorepo / hostnames / `currents-bookkeeping` / `currentsbk.ca` / `salmon-run` | generic project names (`payments-service`) or removed                                                   |
+| `Tasks/Manual/`, `Invoke-GitPullSafe.ps1`, `Invoke-SafeCommit.ps1`                      | "your team's convention" / "your issue tracker or `TODO/`"                                              |
+| Any absolute Windows path (`C:\…`, backslash paths to private dirs)                     | relative / portable references                                                                          |
 
 ### 4. Keep identical
 

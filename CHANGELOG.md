@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.3.0] - 2026-08-15
 
 ### Changed
+
 - Plugin renamed to **`4c-bugfix`** as the primary name; the legacy
   `agentic-4c-bugfix` skill remains as a **deprecated forwarding alias** for
   one migration cycle (its SKILL.md now carries a forwarding notice).
@@ -25,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.0] - 2026-08-15
 
 ### Added
+
 - `4c-bugfix` as the concise primary orchestrator skill name; the original
   plugin/skill remains available as a compatibility alias during migration.
 - Mandatory property/invariant classification and reproducible property-suite
@@ -33,12 +35,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   85% and zero meaningful financial/security survivors.
 
 ### Changed
+
 - `4c-check` now records property seeds, mutation scores, and survivor
   dispositions as part of the red-then-green completion evidence.
 
 ## [0.1.0] - 2026-08-11
 
 ### Added
+
 - Initial public release of the 4C bug-fixing skill pack.
 - `agentic-4c-bugfix` orchestrator skill with triage, mandatory dossier, and an
   adjacency table to related tools.
@@ -56,6 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   implementation.
 
 ### Notes
+
 - This public plugin is a generalized projection of a private canonical
   implementation; private fleet services, absolute paths, and internal token
   names are intentionally omitted.

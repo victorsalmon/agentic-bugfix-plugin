@@ -13,13 +13,13 @@ triggers:
 
 # 4C Concern — Pin the failure (RED gate)
 
-Goal: a committed, failing test that proves the bug exists, *before* any source
+Goal: a committed, failing test that proves the bug exists, _before_ any source
 edit. This is the gate the whole loop depends on.
 
 1. Read the bug report, logs, and existing tests. Ask **at most two** clarifying
    questions if the reproduction is ambiguous — then proceed.
 2. State the failure in one sentence and write it to the dossier
-   (`.4c/<bug-id>.md`, Concern section): *"When X, Y happens instead of Z."*
+   (`.4c/<bug-id>.md`, Concern section): _"When X, Y happens instead of Z."_
 3. **Do not edit application source.** Tests only.
 4. Choose the lowest layer that shows the bug. If the repo has a test-suite
    skill or documented runner, use it to pick the right layer (unit / integration

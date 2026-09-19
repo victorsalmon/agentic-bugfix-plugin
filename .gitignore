@@ -24,3 +24,6 @@ dist/
 
 # Lane worktrees (transient salmon-run checkouts live inside the repo)
 .worktrees/
+
+# Local install artifact - no lockfile is committed for this plugin
+package-lock.json
