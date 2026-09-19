@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `AGENTS.md` — agent orientation: layout, commands, invariants, and the
+  change checklist.
+- `tests/validate-json.test.js` plus skills-index parity assertions in
+  `tests/skills.test.js`.
+
+### Changed
+
+- The private-reference leak check now scans the whole repository tree
+  (skipping VCS metadata, dependencies, lane worktrees, dossiers, and build
+  output) instead of a hand-maintained allowlist, so new files are guarded by
+  default.
+- `scripts/validate-json.js` is importable (it no longer runs or exits on
+  import), returns a boolean, and rejects a non-array `plugins` field.
+- `skills/skills-index.json` no longer names an external generator script.
+
+### Fixed
+
+- `npm run format:check` is line-ending agnostic (`endOfLine: "auto"`), so a
+  CRLF checkout no longer fails the style gate.
+- `.gitignore` now also covers `.backup/` and `.quarantine/` lane state.
+
 ## [0.3.0] - 2026-08-15
 
 ### Changed
