@@ -95,6 +95,9 @@ function validateMarketplacePlugins(relativePath, plugins) {
 
 /**
  * Run the manifest validation suite.
+ *
+ * @returns {boolean} Whether every manifest passed. The CLI entry point maps
+ * this to an exit code; callers that import the module can assert on it.
  */
 function runValidation() {
   let allValid = true;
@@ -111,8 +114,11 @@ function runValidation() {
       allValid = false;
     }
 
-    if (file === 'marketplace.json' && Array.isArray(data.plugins)) {
-      if (!validateMarketplacePlugins(file, data.plugins)) {
+    if (file === 'marketplace.json') {
+      if (!Array.isArray(data.plugins)) {
+        console.error(`FAIL: ${file} "plugins" must be an array`);
+        allValid = false;
+      } else if (!validateMarketplacePlugins(file, data.plugins)) {
         allValid = false;
       }
     }
@@ -120,10 +126,20 @@ function runValidation() {
 
   if (allValid) {
     console.log('All JSON manifests are valid.');
-    process.exit(0);
-  } else {
-    process.exit(1);
   }
+  return allValid;
 }
 
-runValidation();
+if (require.main === module) {
+  process.exit(runValidation() ? 0 : 1);
+}
+
+module.exports = {
+  PLUGIN_REQUIRED_FIELDS,
+  MANIFEST_DEFINITIONS,
+  getMissingKeys,
+  parseManifest,
+  validateTopLevelManifest,
+  validateMarketplacePlugins,
+  runValidation,
+};
