@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Dev tooling is now deterministic: `package-lock.json` is committed and CI
+  installs with `npm ci --ignore-scripts` (no more `|| true` masking an install
+  failure). `--ignore-scripts` remains deliberate hardening. This reverses the
+  previous "no lockfile" policy.
 - The private-reference leak check now scans the whole repository tree
   (skipping VCS metadata, dependencies, lane worktrees, dossiers, and build
   output) instead of a hand-maintained allowlist, so new files are guarded by

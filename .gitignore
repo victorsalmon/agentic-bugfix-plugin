@@ -27,6 +27,3 @@ dist/
 .worktrees/
 .backup/
 .quarantine/
-
-# Local install artifact - no lockfile is committed for this plugin
-package-lock.json

@@ -31,6 +31,21 @@ verifiability**, not feature count.
 - **Scanner-agnosticism.** The methodology must not depend on any paid or
   private tool.
 
+## Development tooling
+
+Dev tooling is installed deterministically from the committed
+`package-lock.json`:
+
+```
+npm ci --ignore-scripts
+```
+
+`npm ci` is the supported install — it fails loudly if the lockfile and
+`package.json` disagree — so a dependency change must update the lockfile in the
+same commit. `--ignore-scripts` is deliberate hardening: no dependency lifecycle
+script runs during install. CI runs the same command (without `|| true`), so an
+install failure fails the job instead of being masked.
+
 ## How to propose a change
 
 1. Open an issue first for anything beyond a typo or docs fix — a short sketch

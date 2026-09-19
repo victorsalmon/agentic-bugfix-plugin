@@ -29,7 +29,7 @@ Node + npm.
 Run from the repo root:
 
 ```
-npm install           # dev tooling only (no runtime dependencies)
+npm ci                # dev tooling only (no runtime deps; lockfile committed)
 npm test              # offline test suite (node --test)
 npm run check         # private-reference leak scan
 npm run validate      # JSON manifest validation

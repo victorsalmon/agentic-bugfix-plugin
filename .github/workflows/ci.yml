@@ -18,8 +18,8 @@ jobs:
         with:
           node-version-file: .nvmrc
 
-      - name: Install dependencies (if any)
-        run: npm install --ignore-scripts || true
+      - name: Install dependencies (lockfile-backed)
+        run: npm ci --ignore-scripts
 
       - name: Run private-refs check
         run: npm run check
