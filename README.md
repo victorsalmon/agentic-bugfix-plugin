@@ -58,6 +58,8 @@ Each gate is its own invocable skill, so you can run the whole loop
 
 You can also invoke a gate directly, e.g. `/4c-concern` to just pin a reproduction, or `/4c-check` to verify someone else's fix.
 
+For a concrete end-to-end interaction, see [`examples/usage.md`](./examples/usage.md).
+
 ---
 
 ## Installation
