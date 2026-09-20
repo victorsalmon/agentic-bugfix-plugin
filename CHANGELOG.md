@@ -20,6 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   installs with `npm ci --ignore-scripts` (no more `|| true` masking an install
   failure). `--ignore-scripts` remains deliberate hardening. This reverses the
   previous "no lockfile" policy.
+- Dev/CI toolchain majors: `eslint` and `@eslint/js` moved to their 10.x line
+  and `globals` to 17.x, and the CI workflow pins `actions/checkout@v7` and
+  `actions/setup-node@v7`. Node stays on 24 (`.nvmrc` unchanged).
 - The private-reference leak check now scans the whole repository tree
   (skipping VCS metadata, dependencies, lane worktrees, dossiers, and build
   output) instead of a hand-maintained allowlist, so new files are guarded by
