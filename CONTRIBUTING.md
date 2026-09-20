@@ -46,6 +46,10 @@ same commit. `--ignore-scripts` is deliberate hardening: no dependency lifecycle
 script runs during install. CI runs the same command (without `|| true`), so an
 install failure fails the job instead of being masked.
 
+**Dependency lockfile policy (Option A, decided 2026-09-19).** The lockfile is
+committed, CI installs with `npm ci --ignore-scripts`, and `--ignore-scripts`
+stays.
+
 ## How to propose a change
 
 1. Open an issue first for anything beyond a typo or docs fix — a short sketch
