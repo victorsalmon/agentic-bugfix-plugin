@@ -40,3 +40,26 @@ edit. This is the gate the whole loop depends on.
 8. Optional quality-scan gate: run your defect-prediction / static-analysis
    scanner on the target if one is available. Treat the result as advisory only.
    Record findings (or "scanner unavailable") in the dossier.
+
+## This gate is the change-level case of a general obligation
+
+The red reproduction is not a special ceremony for bugs. It is the bug-shaped
+case of one rule that applies to every change, fix or feature: **a change is not
+proven until a test fails without it and passes with it.** A bug happens to be
+the case where the "without it" half already exists in production.
+
+So when the fix lands, do not stop at "the repro is green". Ask the same
+question about the *rest* of the diff: if the new behaviour were inverted or
+off-by-one, would any test notice? The deterministic way to answer that is the
+diff-adversarial gate, which mutates only the lines the change added and
+requires the change's own tests to fail:
+
+```powershell
+pwsh -NoProfile -File <cl-common>/Skills/battle-tested-qa/scripts/Invoke-DodgyDiff.ps1 `
+  -RepoRoot <repo> -BaseRef <base> -TestCommand "<focused tests>"
+```
+
+`0` = every mutation of the change was noticed, `1` = at least one was not (a
+surviving mutant: add the assertion), `2` = cannot-evaluate (no mutable line,
+red baseline, dirty file) - which is work to do, never a pass. Doctrine and
+limits: `Skills/battle-tested-qa/references/diff-adversarial-testing.md`.
